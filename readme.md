@@ -1,9 +1,9 @@
-# Module - Azure App Service Plan
+# Module - Azure Service Plan
 [![COE](https://img.shields.io/badge/Created%20By-CCoE-blue)]()
 [![HCL](https://img.shields.io/badge/language-HCL-blueviolet)](https://www.terraform.io/)
 [![Azure](https://img.shields.io/badge/provider-Azure-blue)](https://registry.terraform.io/providers/hashicorp/azurerm/latest)
 
-Module developed to standardize the creation of App Service Plan
+Module developed to standardize the creation of Service Plan
 
 ## Compatibility Matrix
 
@@ -21,16 +21,12 @@ Note: The `?ref=***` refers a tag on the git module repo.
 ## Use case
 ```hcl
 module "plan-<system>-<env>-<id>" {
-  source              = "git::https://github.com/danilomnds/terraform-azurerm-app-service-plan?ref=v1.0.0"
+  source              = "git::https://github.com/danilomnds/terraform-azurerm-service-plan?ref=v1.0.0"
   name                = "plan-<system>-<env>-<id>"
   location            = <location>
+  os_type = <Windows|Linux|WindowsContainer>
   resource_group_name = <resource group name>
-  kind = <Windows|Linux|FunctionApp>
-  sku = {
-    tier = <Free|Shared|Basic|Standard|Premium|Isolated>
-    size = <B1-B3|S1-S3|...>
-    capacity = 1
-  }
+  sku_name = <B1-B3|S1-S3|...>
   tags = {
     key1 = value1
     key2 = value2
@@ -40,8 +36,11 @@ module "plan-<system>-<env>-<id>" {
 output "id" {
   value = module.plan-<system>-<env>-<id>.id
 }
-output "maximum_number_of_workers" {
-  value = module.plan-<system>-<env>-<id>.maximum_number_of_workers
+output "kind" {
+  value = module.plan-<system>-<env>-<id>.kind
+}
+output "reserved" {
+  value = module.plan-<system>-<env>-<id>.reserved
 }
 ```
 
@@ -50,33 +49,26 @@ output "maximum_number_of_workers" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | name | plan name | `string` | n/a | `Yes` |
-| resource_group_name | the name of the resource group in which the app service plan exists | `string` | n/a | `Yes` |
 | location | azure region | `string` | n/a | `Yes` |
-| kind | the kind of the app service plan to create | `string` | n/a | `Yes` |
-| maximum_elastic_worker_count | the maximum number of total workers allowed for this elasticscaleenabled app service plan | `number` | `null` | No |
-| sku | a block as defined below | `object({})` | n/a | No |
-| app_service_environment_id | the id of the app service environment where the app service plan should be located | `string` | n/a | No |
-| reserved | is this app service plan reserved?  | `bool` | `false` | No |
-| is_xenon | whether to create a xenon app service plan | `bool` | n/a | No |
-| zone_redundant | specifies if the app service plan should be zone redundant | `bool` | n/a | No |
+| os_type | the o/s type for the app services to be hosted in this plan | `string` | n/a | `Yes` |
+| resource_group_name | the name of the resource group in which the app service plan exists | `string` | n/a | `Yes` |
+| sku_name | the SKU for the plan | `string` | n/a | `Yes` |
+| app_service_environment_id | the SKU for the plan | `string` | n/a | `Yes` |
+| maximum_elastic_worker_count | the maximum number of total workers allowed for this elasticscaleenabled app service plan | `number` | `1` | No |
+| worker_count | the number of Workers (instances) to be allocated | `bool` | `false` | No |
+| per_site_scaling_enabled | should per site scaling be enabled | `bool` | `false` | No |
+| zone_balancing_enabled | should the service plan balance across availability zones in the region | `bool` | `false` | No |
 | tags | tags for the resource | `map(string)` | `{}` | No |
 | azure_ad_groups | list of azure AD groups that will have reader access  | `list` | `[]` | No |
-
-# Object variables for blocks
-
-| Variable Name (Block) | Parameter | Description | Type | Default | Required |
-|-----------------------|-----------|-------------|------|---------|:--------:|
-| sku | tier | specifies the plan's pricing tier | `string` | n/a | `Yes` |
-| sku | size | specifies the plan's instance size | `string` | n/a | `Yes` |
-| sku | capacity | specifies the number of workers associated with this app service plan | `number` | `null` | No |
 
   ## Output variables
 
 | Name | Description |
 |------|-------------|
-| id | app service plan id |
-| maximum_number_of_workers | maximum number of workers |
+| id | service plan id |
+| kind | maximum number of workers |
+| reserved | whether this is a reserved service plan type |
 
 ## Documentation
-App Service Plan: <br>
-[https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_plan](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_plan)
+Service Plan: <br>
+[https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_plan](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_plan)

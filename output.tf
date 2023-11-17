@@ -1,8 +1,11 @@
 output "id" {
-  value = azurerm_app_service_plan.app_service_plan.id
+  value = azurerm_service_plan.service_plan.id
 }
 
-output "maximum_number_of_workers" {
-  description = "maximum number of workers"
-  value       = azurerm_app_service_plan.app_service_plan.maximum_number_of_workers
+output "kind" {
+  value = azurerm_service_plan.service_plan.kind
+}
+
+output "reserved" {
+  value = azurerm_service_plan.service_plan.reserved
 }

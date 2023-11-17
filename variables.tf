@@ -2,65 +2,49 @@ variable "name" {
   type = string
 }
 
-variable "resource_group_name" {
-  type = string
-}
-
 variable "location" {
   type = string
 }
 
-variable "kind" {
+variable "os_type" {
   type = string
-  default = "Windows"
 }
 
-variable "maximum_elastic_worker_count" {
-  type = number
-  default = null
+variable "resource_group_name" {
+  type = string
 }
 
-variable "sku" {
-  type = object({
-    tier = string
-    size = string
-    capacity = optional(number)
-  })
-  default = null
+variable "sku_name" {
+  type = string
 }
 
 variable "app_service_environment_id" {
-  type = string
+  type    = string
   default = null
+}
+
+variable "maximum_elastic_worker_count" {
+  type    = number
+  default = 1
 }
 
 /*
-variable "reserved" {
-  type = string
+variable "worker_count" {
+  type = number
   default = null
 }
 */
 
-/* check what's the default value
-variable "per_site_scaling" {
-  type = bool
-  default = null
+variable "per_site_scaling_enabled" {
+  type    = bool
+  default = false
 }
-*/
 
-/* check whats the default value
-variable "is_xenon" {
-  type = bool
-  default = null
-}
-*/
 
-/*
-variable "zone_redundant" {
-  type = string
-  default = null
+variable "zone_balancing_enabled" {
+  type    = string
+  default = false
 }
-*/
 
 variable "tags" {
   description = "A map of tags to set on every taggable resources. Empty by default."
