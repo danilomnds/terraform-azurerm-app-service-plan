@@ -9,13 +9,11 @@ Module developed to standardize the creation of Service Plan
 
 | Module Version | Terraform Version | AzureRM Version |
 |----------------|-------------------| --------------- |
-| v1.0.0         | v1.6.4            | 3.80.0          |
+| v1.0.0         | v1.6.4            | 3.82.0          |
 
 ## Specifying a version
 
-To avoid that your code get updates automatically, is mandatory to set the version using the `source` option. 
-By defining the `?ref=***` in the the URL, you can define the version of the module.
-
+To avoid that your code get the latest module version, you can define the `?ref=***` in the URL to point to a specific version.
 Note: The `?ref=***` refers a tag on the git module repo.
 
 ## Use case
@@ -54,7 +52,7 @@ output "reserved" {
 | resource_group_name | the name of the resource group in which the app service plan exists | `string` | n/a | `Yes` |
 | sku_name | the SKU for the plan | `string` | n/a | `Yes` |
 | app_service_environment_id | the SKU for the plan | `string` | n/a | `Yes` |
-| maximum_elastic_worker_count | the maximum number of total workers allowed for this elasticscaleenabled app service plan | `number` | `1` | No |
+| maximum_elastic_worker_count | the maximum number of total workers allowed for this elasticscaleenabled app service plan | `number` | `null` | No |
 | worker_count | the number of Workers (instances) to be allocated | `bool` | `false` | No |
 | per_site_scaling_enabled | should per site scaling be enabled | `bool` | `false` | No |
 | zone_balancing_enabled | should the service plan balance across availability zones in the region | `bool` | `false` | No |
