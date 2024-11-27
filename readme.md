@@ -10,6 +10,7 @@ Module developed to standardize the creation of Service Plan
 | Module Version | Terraform Version | AzureRM Version |
 |----------------|-------------------| --------------- |
 | v1.0.0         | v1.6.4            | 3.82.0          |
+| v1.1.0         | v1.10.4           | 4.11.0          |
 
 ## Specifying a version
 
@@ -19,7 +20,7 @@ Note: The `?ref=***` refers a tag on the git module repo.
 ## Use case
 ```hcl
 module "plan-<system>-<env>-<id>" {
-  source              = "git::https://github.com/danilomnds/terraform-azurerm-service-plan?ref=v1.0.0"
+  source              = "git::https://github.com/danilomnds/terraform-azurerm-service-plan?ref=v1.1.0"
   name                = "plan-<system>-<env>-<id>"
   location            = <location>
   os_type = <Windows|Linux|WindowsContainer>
@@ -51,7 +52,7 @@ output "reserved" {
 | os_type | the o/s type for the app services to be hosted in this plan | `string` | n/a | `Yes` |
 | resource_group_name | the name of the resource group in which the app service plan exists | `string` | n/a | `Yes` |
 | sku_name | the SKU for the plan | `string` | n/a | `Yes` |
-| app_service_environment_id | the SKU for the plan | `string` | n/a | `Yes` |
+| app_service_environment_id | The ID of the App Service Environment where the App Service Plan should be located | `string` | n/a | `Yes` |
 | maximum_elastic_worker_count | the maximum number of total workers allowed for this elasticscaleenabled app service plan | `number` | `null` | No |
 | worker_count | the number of Workers (instances) to be allocated | `bool` | `false` | No |
 | per_site_scaling_enabled | should per site scaling be enabled | `bool` | `false` | No |

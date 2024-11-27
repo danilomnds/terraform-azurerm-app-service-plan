@@ -6,10 +6,10 @@ resource "azurerm_service_plan" "service_plan" {
   sku_name                     = var.sku_name
   app_service_environment_id   = var.app_service_environment_id
   maximum_elastic_worker_count = var.maximum_elastic_worker_count
-  #worker_count = var.worker_count
-  per_site_scaling_enabled = var.per_site_scaling_enabled
-  zone_balancing_enabled = var.zone_balancing_enabled
-  tags                     = local.tags
+  worker_count                 = var.worker_count
+  per_site_scaling_enabled     = var.per_site_scaling_enabled
+  zone_balancing_enabled       = var.zone_balancing_enabled
+  tags                         = local.tags
   lifecycle {
     ignore_changes = [
       tags["create_date"]

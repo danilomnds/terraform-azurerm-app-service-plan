@@ -28,12 +28,10 @@ variable "maximum_elastic_worker_count" {
   default = null
 }
 
-/*
 variable "worker_count" {
-  type = number
+  type    = number
   default = null
 }
-*/
 
 variable "per_site_scaling_enabled" {
   type    = bool
